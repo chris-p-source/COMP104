@@ -7,4 +7,13 @@
 ###  ``` for commit in repository.Repository("repos/hbase", since=dt1).traverse_commits(): ``` 
 
 # repo list:
-## 1.hbase (a test repo while developing test case correlation)   https://github.com/apache/hbase.git
+## 0. A sample repo used while developing test case correlation (hbase)  
+  https://github.com/apache/hbase.git
+## 1. airflow   
+  https://github.com/apache/airflow.git
+## 2. dolphinscheduler   
+  https://github.com/apache/dolphinscheduler.git
+## 3. druid   
+  https://github.com/apache/druid.git
+## 4. hudi
+  https://github.com/apache/hudi.git
