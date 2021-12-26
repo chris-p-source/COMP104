@@ -17,3 +17,5 @@
   https://github.com/apache/druid.git
 ## 4. hudi
   https://github.com/apache/hudi.git
+## 5. phoenix
+  https://github.com/apache/phoenix.git
