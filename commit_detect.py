@@ -24,6 +24,7 @@ def get_commit_size(files):
     return commit_size
 
 
+
 # determine whether a file is a test file by checking if the code has import test libraries
 # this method has not been run or tested
 # the regex exp follows (Borle,2016)
@@ -49,7 +50,7 @@ def parse_repo(filename):
     parse the repository by extracting the file name and the date of creation
     :parameter filename is the target json file where data are stored
     """
-    # dt1 = datetime(2012, 8, 1)
+    dt1 = datetime(2012, 8, 1)
     file_date = {}
     for commit in repository.Repository("repos/hbase", only_no_merge=True,
                                         only_modifications_with_file_types=['.java']).traverse_commits():  #
@@ -116,7 +117,7 @@ def test_class_correspond(dictionary):
 
 
 parse_repo("data.json")
-# file_dictionary = read_json("data.json")
+file_dictionary = sanitize_files_list(read_json("data.json"))
 # print(file_dictionary)
 # test_correspond = test_class_correspond(file_dictionary)
 # print(test_correspond)
