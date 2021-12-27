@@ -19,3 +19,25 @@
   https://github.com/apache/hudi.git
 ## 5. phoenix
   https://github.com/apache/phoenix.git
+## 6. ignite
+  https://github.com/apache/ignite.git
+## 7. activemq
+  https://github.com/apache/activemq.git
+## 8. ozone
+  https://github.com/apache/ozone.git
+## 9. hive
+  https://github.com/apache/hive.git
+## 10.accumulo
+  https://github.com/apache/accumulo.git
+## 11.cassandra
+  https://github.com/apache/cassandra.git
+## 12.asterixdb
+  https://github.com/apache/asterixdb.git
+## 13.geode
+  https://github.com/apache/geode.git
+## 14.cxf
+  https://github.com/apache/cxf.git
+## 15.iceberg
+  https://github.com/apache/iceberg.git
+## 16. kafka
+  https://github.com/apache/kafka.git
