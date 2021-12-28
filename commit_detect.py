@@ -59,6 +59,7 @@ def parse_repo(filename):
                 continue
             else:
                 commit_size = get_commit_size(commit.modified_files)  # calculate the size of the commit
+                print(commit_size)
                 file_date[file.filename] = [str(commit.committer_date), commit_size]
 
     file = open(filename, 'w')
@@ -116,11 +117,11 @@ def test_class_correspond(dictionary):
     return result
 
 
-parse_repo("hbase")  # read the repository and list all files and creation date to json
-parse_repo("dolphinscheduler")  # read the repository and list all files and creation date to json
-parse_repo("druid")  # read the repository and list all files and creation date to json
-parse_repo("hudi")  # read the repository and list all files and creation date to json
-parse_repo("phoenix")  # read the repository and list all files and creation date to json
+# parse_repo("hbase")  # read the repository and list all files and creation date to json
+# parse_repo("dolphinscheduler")  # read the repository and list all files and creation date to json
+# parse_repo("druid")  # read the repository and list all files and creation date to json
+# parse_repo("hudi")  # read the repository and list all files and creation date to json
+# parse_repo("phoenix")  # read the repository and list all files and creation date to json
 parse_repo("ignite")  # read the repository and list all files and creation date to json
 parse_repo("activemq")  # read the repository and list all files and creation date to json
 parse_repo("ozone")  # read the repository and list all files and creation date to json
