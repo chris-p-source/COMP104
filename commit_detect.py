@@ -122,17 +122,17 @@ def test_class_correspond(dictionary):
 # parse_repo("druid")  # read the repository and list all files and creation date to json
 # parse_repo("hudi")  # read the repository and list all files and creation date to json
 # parse_repo("phoenix")  # read the repository and list all files and creation date to json
-parse_repo("ignite")  # read the repository and list all files and creation date to json
-parse_repo("activemq")  # read the repository and list all files and creation date to json
-parse_repo("ozone")  # read the repository and list all files and creation date to json
-parse_repo("hive")  # read the repository and list all files and creation date to json
-parse_repo("accumulo")  # read the repository and list all files and creation date to json
-parse_repo("cassandra")  # read the repository and list all files and creation date to json
+# parse_repo("ignite")  # read the repository and list all files and creation date to json
+# parse_repo("activemq")  # read the repository and list all files and creation date to json
+# parse_repo("ozone")  # read the repository and list all files and creation date to json
+# parse_repo("hive")  # read the repository and list all files and creation date to json
+# parse_repo("accumulo")  # read the repository and list all files and creation date to json
+# parse_repo("cassandra")  # read the repository and list all files and creation date to json
 parse_repo("asterixdb")  # read the repository and list all files and creation date to json
-parse_repo("geode")  # read the repository and list all files and creation date to json
-parse_repo("cxf")  # read the repository and list all files and creation date to json
-parse_repo("iceberg")  # read the repository and list all files and creation date to json
-parse_repo("kafka")  # read the repository and list all files and creation date to json
+# parse_repo("geode")  # read the repository and list all files and creation date to json
+# parse_repo("cxf")  # read the repository and list all files and creation date to json
+# parse_repo("iceberg")  # read the repository and list all files and creation date to json
+# parse_repo("kafka")  # read the repository and list all files and creation date to json
 
 # file_dictionary = sanitize_files_list(read_json("hbase"))  # read json, remove any file that are not .java
 # print(file_dictionary)
