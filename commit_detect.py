@@ -1,3 +1,4 @@
+import difflib
 from datetime import datetime
 from pydriller import repository
 import json
@@ -24,7 +25,6 @@ def get_commit_size(files):
     return commit_size
 
 
-
 # determine whether a file is a test file by checking if the code has import test libraries
 # this method has not been run or tested
 # the regex exp follows (Borle,2016)
@@ -36,11 +36,21 @@ def has_import_statement(file):
                 (junit\.framework\.TestCase)|
                 (org\.testng\.*)|
                 (android\.test\.*)$"""
-    matchObj = re.search(regexStr, file.source_code)
-    if (matchObj is not None):
-        return True
-    else:
-        return False
+
+    matchObj = None
+
+    try:
+        if file.source_code is not None:
+            matchObj = re.search(regexStr, file.source_code)
+    except:
+        with open("ErrorMsg.txt", "a") as text_file:
+            text_file.write(regexStr + ", " + file.filename)
+        # print(regexStr, file.source_code)
+    finally:
+        if matchObj is not None:
+            return True
+        else:
+            return False
 
 
 # find the creation of all test files
@@ -60,9 +70,9 @@ def parse_repo(filename):
             else:
                 commit_size = get_commit_size(commit.modified_files)  # calculate the size of the commit
                 print(commit_size)
-                file_date[file.filename] = [str(commit.committer_date), commit_size]
+                file_date[file.filename] = [str(commit.committer_date), commit_size, has_import_statement(file)]
 
-    file = open(filename, 'w')
+    file = open(filename + ".json", 'w')
     temp = json.dumps(file_date)
     file.write(temp)
     file.close()
@@ -97,7 +107,7 @@ def test_class_correspond(dictionary):
     """
     iterate the dictionary and find all class and their corresponding test class
     :parameter dictionary is the source dictionary that lists all filename and date of creation
-    :return a dictionary eg. {class : [test_class, commit size of class, commit size of test class]}
+    :return a dictionary of all matching tests and classes eg. {class : [test_class, commit size of class, commit size of test class]}
     """
     all_tests = {}
     result = {}
@@ -111,9 +121,13 @@ def test_class_correspond(dictionary):
 
     for key in all_tests:  # key is the current filename of the test class
         for temp in dictionary:  # temp is the filename of the original file list
-            if temp in key:  # match found
-                print(key, temp)
-                result[temp] = [key, dictionary[temp], all_tests[key]]
+            # get all test file with a regex match
+            # difflib.SequenceMatcher(isjunk=None, a=temp, b=key)
+            striped = key.lower().replace("test", "").lstrip("_-").replace(".java", "").rstrip(
+                "_-") + ".java"  # name of the test file
+            # print(striped)
+            if striped == temp.lower():  # current filename of source code
+                result[temp] = [key, dictionary[temp][0], all_tests[key][0], dictionary[temp][1], all_tests[key][1]]
     return result
 
 
@@ -128,13 +142,14 @@ def test_class_correspond(dictionary):
 # parse_repo("hive")  # read the repository and list all files and creation date to json
 # parse_repo("accumulo")  # read the repository and list all files and creation date to json
 # parse_repo("cassandra")  # read the repository and list all files and creation date to json
-parse_repo("asterixdb")  # read the repository and list all files and creation date to json
+# parse_repo("asterixdb")  # read the repository and list all files and creation date to json
 # parse_repo("geode")  # read the repository and list all files and creation date to json
 # parse_repo("cxf")  # read the repository and list all files and creation date to json
 # parse_repo("iceberg")  # read the repository and list all files and creation date to json
 # parse_repo("kafka")  # read the repository and list all files and creation date to json
 
-# file_dictionary = sanitize_files_list(read_json("hbase"))  # read json, remove any file that are not .java
+file_dictionary = sanitize_files_list(read_json("hbase"))  # read json, remove any file that are not .java
 # print(file_dictionary)
-# test_correspond = test_class_correspond(file_dictionary)  # find all corresponding test classes in json
-# print(test_correspond)
+test_correspond = test_class_correspond(file_dictionary)  # find all corresponding test classes in json
+print(test_correspond)
+
