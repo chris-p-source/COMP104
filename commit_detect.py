@@ -18,7 +18,7 @@ def get_commit_size(files):
 
     commit_size = 0
     for m in files:
-        print(m.added_lines, m.deleted_lines)
+        # print(m.added_lines, m.deleted_lines)
         temp = m.added_lines + m.deleted_lines
         commit_size += temp
 
