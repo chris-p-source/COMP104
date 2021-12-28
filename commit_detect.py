@@ -50,9 +50,8 @@ def parse_repo(filename):
     parse the repository by extracting the file name and the date of creation
     :parameter filename is the target json file where data are stored
     """
-    dt1 = datetime(2012, 8, 1)
     file_date = {}
-    for commit in repository.Repository("repos/hbase", only_no_merge=True,
+    for commit in repository.Repository("repos/" + filename, only_no_merge=True,
                                         only_modifications_with_file_types=['.java']).traverse_commits():  #
         print(commit.committer_date)
         for file in commit.modified_files:
@@ -75,7 +74,7 @@ def read_json(filename):
     :parameter filename is the target json file where data are stored
     :return a dictionary eg. {filename : [date, commit size]}
     """
-    file = open(filename, 'r')
+    file = open(filename + ".json", 'r')
     content = json.loads(file.read())
     return content
 
@@ -117,8 +116,24 @@ def test_class_correspond(dictionary):
     return result
 
 
-# parse_repo("data.json")
-file_dictionary = sanitize_files_list(read_json("data.json"))
+parse_repo("hbase")  # read the repository and list all files and creation date to json
+parse_repo("dolphinscheduler")  # read the repository and list all files and creation date to json
+parse_repo("druid")  # read the repository and list all files and creation date to json
+parse_repo("hudi")  # read the repository and list all files and creation date to json
+parse_repo("phoenix")  # read the repository and list all files and creation date to json
+parse_repo("ignite")  # read the repository and list all files and creation date to json
+parse_repo("activemq")  # read the repository and list all files and creation date to json
+parse_repo("ozone")  # read the repository and list all files and creation date to json
+parse_repo("hive")  # read the repository and list all files and creation date to json
+parse_repo("accumulo")  # read the repository and list all files and creation date to json
+parse_repo("cassandra")  # read the repository and list all files and creation date to json
+parse_repo("asterixdb")  # read the repository and list all files and creation date to json
+parse_repo("geode")  # read the repository and list all files and creation date to json
+parse_repo("cxf")  # read the repository and list all files and creation date to json
+parse_repo("iceberg")  # read the repository and list all files and creation date to json
+parse_repo("kafka")  # read the repository and list all files and creation date to json
+
+# file_dictionary = sanitize_files_list(read_json("hbase"))  # read json, remove any file that are not .java
 # print(file_dictionary)
-test_correspond = test_class_correspond(file_dictionary)
-print(test_correspond)
+# test_correspond = test_class_correspond(file_dictionary)  # find all corresponding test classes in json
+# print(test_correspond)
