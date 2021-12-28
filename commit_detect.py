@@ -102,8 +102,9 @@ def test_class_correspond(dictionary):
     all_tests = {}
     result = {}
     for key in dictionary:  # creat a list that contains only test classes
-        if "test" in key:  # this is a test class
+        if "test" in key.lower():  # this is a test class
             all_tests[key] = dictionary[key]
+    # print(all_tests)
 
     for key in all_tests:
         dictionary.pop(key)  # remove test file from the original list
@@ -112,12 +113,12 @@ def test_class_correspond(dictionary):
         for temp in dictionary:  # temp is the filename of the original file list
             if temp in key:  # match found
                 print(key, temp)
-                result[temp] = [key, all_tests[temp], all_tests[key]]
+                result[temp] = [key, dictionary[temp], all_tests[key]]
     return result
 
 
-parse_repo("data.json")
+# parse_repo("data.json")
 file_dictionary = sanitize_files_list(read_json("data.json"))
 # print(file_dictionary)
-# test_correspond = test_class_correspond(file_dictionary)
-# print(test_correspond)
+test_correspond = test_class_correspond(file_dictionary)
+print(test_correspond)
